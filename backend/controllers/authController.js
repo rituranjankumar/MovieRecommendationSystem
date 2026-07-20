@@ -11,12 +11,12 @@ const generateToken = (id) => {
 const setAuthCookie = (res, token) => {
   res.cookie("jwt", token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    secure: true,          // Always true on HTTPS
+    sameSite: "none",      // Required for cross-origin cookies
     maxAge: 7 * 24 * 60 * 60 * 1000,
+    path: "/",
   });
 };
-
 // Signup
 export const signup = async (req, res, next) => {
   try {
@@ -117,8 +117,12 @@ export const login = async (req, res, next) => {
 
 // Logout
 export const logout = (req, res) => {
-
-  res.clearCookie("jwt");
+  res.clearCookie("jwt", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    path: "/",
+  });
 
   res.status(200).json({
     success: true,
