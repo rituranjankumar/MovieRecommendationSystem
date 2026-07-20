@@ -93,7 +93,7 @@ flowchart TD
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/MovieRecommendationSystem.git
+git clone https://github.com/rituranjankumar/MovieRecommendationSystem.git
 cd MovieRecommendationSystem
 ```
 
