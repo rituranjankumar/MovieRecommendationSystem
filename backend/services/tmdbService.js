@@ -13,11 +13,17 @@ console.log("TMDB_BASE_URL:", process.env.TMDB_BASE_URL);
 console.log("TMDB_API_KEY:", process.env.TMDB_API_KEY);
 // Common Request Function
 const fetchData = async (url, params = {}) => {
-  const response = await tmdb.get(url, {
-    params,
-  });
+  try {
+    const response = await tmdb.get(url, { params });
+    return response.data;
+  } catch (error) {
+    console.error("TMDB ERROR");
+    console.error("URL:", url);
+    console.error("Status:", error.response?.status);
+    console.error("Data:", error.response?.data);
 
-  return response.data;
+    throw error;
+  }
 };
 
 // Trending Movies
