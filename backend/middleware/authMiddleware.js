@@ -3,7 +3,11 @@ import User from "../models/userModel.js";
 
 const protect = async (req, res, next) => {
   try {
+    console.log("Cookies:", req.cookies);
+
     const token = req.cookies?.jwt;
+
+    console.log("Token:", token);
 
     if (!token) {
       return res.status(401).json({
@@ -13,6 +17,8 @@ const protect = async (req, res, next) => {
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    console.log("Decoded:", decoded);
 
     const user = await User.findById(decoded.id).select("-password");
 
@@ -24,9 +30,11 @@ const protect = async (req, res, next) => {
     }
 
     req.user = user;
-
     next();
-  } catch (error) {
+
+  } catch (err) {
+    console.log("JWT ERROR:", err.message);
+
     return res.status(401).json({
       success: false,
       message: "Invalid or expired token",

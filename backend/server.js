@@ -54,7 +54,19 @@ app.get("/", (req, res) => {
     message: "Movie Discovery API is running",
   });
 });
+import https from "https";
 
+app.get("/ping-tmdb", (req, res) => {
+  https
+    .get("https://api.themoviedb.org/3", (response) => {
+      res.json({
+        status: response.statusCode,
+      });
+    })
+    .on("error", (err) => {
+      res.json(err);
+    });
+});
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/movies", movieRoutes);
