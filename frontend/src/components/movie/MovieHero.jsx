@@ -7,11 +7,11 @@ const MovieHero = ({
   onFavoriteToggle,
 }) => {
   const poster = movie.poster_path
-    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+    ? `https://image.tmdb.org/t/p/w342${movie.poster_path}`
     : "https://placehold.co/500x750?text=No+Poster";
 
   const backdrop = movie.backdrop_path
-    ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
+    ? `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`
     : poster;
 
   return (
@@ -22,6 +22,8 @@ const MovieHero = ({
         <img
           src={backdrop}
           alt={movie.title}
+          loading="eager"
+          decoding="async"
           className="absolute inset-0 h-full w-full object-cover"
         />
 
@@ -33,6 +35,8 @@ const MovieHero = ({
           <img
             src={poster}
             alt={movie.title}
+            loading="eager"
+            decoding="async"
             className="h-[360px] w-[240px] rounded-2xl object-cover shadow-2xl"
           />
 

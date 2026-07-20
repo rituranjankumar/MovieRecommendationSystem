@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 
-const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
+const IMAGE_BASE_URL = "https://image.tmdb.org/t/p";
 
 const MovieCard = ({ movie }) => {
   const poster = movie.poster_path
-    ? `${IMAGE_BASE_URL}${movie.poster_path}`
+    ? `${IMAGE_BASE_URL}/w342${movie.poster_path}`
     : "https://placehold.co/500x750?text=No+Poster";
 
   return (
@@ -17,6 +17,8 @@ const MovieCard = ({ movie }) => {
         <img
           src={poster}
           alt={movie.title}
+          loading="lazy"
+          decoding="async"
           className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
         />
 

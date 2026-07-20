@@ -15,7 +15,7 @@ const CastSection = ({ cast = [] }) => {
         <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5">
           {topCast.map((person) => {
             const profileImage = person.profile_path
-              ? `https://image.tmdb.org/t/p/w300${person.profile_path}`
+              ? `https://image.tmdb.org/t/p/w185${person.profile_path}`
               : "https://placehold.co/300x450?text=No+Photo";
 
             return (
@@ -26,6 +26,8 @@ const CastSection = ({ cast = [] }) => {
                 <img
                   src={profileImage}
                   alt={person.name}
+                  loading="lazy"
+                  decoding="async"
                   className="h-64 w-full object-cover"
                 />
 

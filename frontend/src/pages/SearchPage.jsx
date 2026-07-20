@@ -47,8 +47,10 @@ const SearchPage = () => {
               className="overflow-hidden  rounded-xl border border-zinc-800 bg-zinc-900 transition hover:border-red-600"
             >
               <img
-                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
                 alt={movie.title || movie.name}
+                loading="lazy"
+                decoding="async"
                 className="h-72 w-full object-cover"
               />
 

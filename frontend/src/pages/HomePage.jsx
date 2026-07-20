@@ -8,7 +8,7 @@ import { fetchRecommendations } from "../services/recommendationService";
 
 const imageUrl = (path) =>
   path
-    ? `https://image.tmdb.org/t/p/w500${path}`
+    ? `https://image.tmdb.org/t/p/w342${path}`
     : "https://via.placeholder.com/500x750?text=No+Image";
 
 const SkeletonCard = () => (
@@ -43,6 +43,8 @@ const Section = ({ title, items, loading }) => (
             <img
               src={imageUrl(movie.poster_path)}
               alt={movie.title || movie.name}
+              loading="lazy"
+              decoding="async"
               className="h-72 w-full object-cover"
             />
 
