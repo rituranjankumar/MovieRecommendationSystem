@@ -3,11 +3,11 @@ import User from "../models/userModel.js";
 
 const protect = async (req, res, next) => {
   try {
-    console.log("Cookies:", req.cookies);
-
-    const token = req.cookies?.jwt;
-
-    console.log("Token:", token);
+    const cookieToken = req.cookies?.jwt;
+    const headerToken = req.headers.authorization?.startsWith("Bearer ")
+      ? req.headers.authorization.slice(7)
+      : null;
+    const token = cookieToken || headerToken;
 
     if (!token) {
       return res.status(401).json({

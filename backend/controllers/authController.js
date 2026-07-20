@@ -8,11 +8,13 @@ const generateToken = (id) => {
   });
 };
 
+const isProduction = process.env.NODE_ENV === "production";
+
 const setAuthCookie = (res, token) => {
   res.cookie("jwt", token, {
     httpOnly: true,
-    secure: true,          // Always true on HTTPS
-    sameSite: "none",      // Required for cross-origin cookies
+    secure: isProduction,
+    sameSite: isProduction ? "none" : "lax",
     maxAge: 7 * 24 * 60 * 60 * 1000,
     path: "/",
   });
@@ -119,8 +121,8 @@ export const login = async (req, res, next) => {
 export const logout = (req, res) => {
   res.clearCookie("jwt", {
     httpOnly: true,
-    secure: true,
-    sameSite: "none",
+    secure: isProduction,
+    sameSite: isProduction ? "none" : "lax",
     path: "/",
   });
 
