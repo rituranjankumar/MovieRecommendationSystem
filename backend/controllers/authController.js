@@ -9,7 +9,8 @@ const generateToken = (id) => {
 };
 
 const isProduction = process.env.NODE_ENV === "production";
-
+console.log("NODE_ENV =", process.env.NODE_ENV);
+console.log("isProduction =", isProduction);
 const setAuthCookie = (res, token) => {
   res.cookie("jwt", token, {
     httpOnly: true,

@@ -75,98 +75,100 @@ const Navbar = () => {
   };
 
   return (
-    <header className="relative z-50 border-b border-zinc-800 bg-zinc-950/95 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        <Link
-          to="/"
-          className="text-xl font-semibold tracking-wide text-white"
+    <header className="sticky top-0 z-50 border-b border-zinc-800 bg-zinc-950/95 backdrop-blur">
+  <div className="mx-auto max-w-7xl px-4 py-4">
+
+    {/* Top Row */}
+    <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+
+      {/* Logo */}
+      <Link
+        to="/"
+        className="text-2xl font-bold text-white text-center lg:text-left"
+      >
+        AIFlix
+      </Link>
+
+      {/* Navigation */}
+      <nav className="flex flex-wrap justify-center gap-5 text-sm text-zinc-300">
+        <NavLink to="/">Home</NavLink>
+
+        <NavLink
+          to="/favorites"
+          className="flex items-center gap-1"
         >
-          AIFlix 
-        </Link>
+          <FiHeart />
+          Favorites
+        </NavLink>
 
-        <div className="hidden flex-1 items-center justify-center px-6 md:flex">
-          <div className="relative w-full max-w-xl">
-            <div className="flex items-center rounded-full border border-zinc-700 bg-zinc-900 px-4 py-2">
-              <FiSearch className="mr-2 text-zinc-400" />
+        <NavLink
+          to="/profile"
+          className="flex items-center gap-1"
+        >
+          <FiUser />
+          Profile
+        </NavLink>
 
-              <input
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                onKeyDown={handleSearch}
-                placeholder="Search movies"
-                className="w-full bg-transparent text-sm outline-none"
-              />
-            </div>
-
-            {(suggestions.length > 0 || loadingSuggestions) && (
-              <div className="absolute left-0 right-0 top-full z-50 mt-2 rounded-xl border border-zinc-800 bg-zinc-950 shadow-xl">
-                {loadingSuggestions ? (
-                  <p className="px-4 py-3 text-sm text-zinc-400">
-                    Searching...
-                  </p>
-                ) : (
-                  suggestions.map((movie) => (
-                    <button
-                      key={movie.id}
-                      onClick={() =>
-                        handleSuggestionClick(movie)
-                      }
-                      className="flex w-full z-50 items-center gap-3 px-4 py-3 text-left text-sm text-zinc-300 transition hover:bg-zinc-900"
-                    >
-                      <span className="text-white">
-                        {movie.title || movie.name}
-                      </span>
-                    </button>
-                  ))
-                )}
-              </div>
-            )}
-          </div>
-        </div>
-
-        <nav className="flex items-center gap-4 text-sm text-zinc-300">
-          <NavLink
-            to="/"
-            className="transition hover:text-white"
+        {isAuthenticated ? (
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-1"
           >
-            Home
+            <FiLogOut />
+            Logout
+          </button>
+        ) : (
+          <NavLink to="/login">
+            Login
           </NavLink>
+        )}
+      </nav>
 
-          <NavLink
-            to="/favorites"
-            className="flex items-center gap-1 transition hover:text-white"
-          >
-            <FiHeart />
-            Favorites
-          </NavLink>
+    </div>
 
-          <NavLink
-            to="/profile"
-            className="flex items-center gap-1 transition hover:text-white"
-          >
-            <FiUser />
-            Profile
-          </NavLink>
+    {/* Search Bar */}
+    <div className="relative mt-4">
 
-          {isAuthenticated ? (
-            <button
-              onClick={handleLogout}
-              className="flex items-center gap-1 transition hover:text-white"
-            >
-              <FiLogOut />
-              Logout
-            </button>
-          ) : (
-            <NavLink
-              to="/login"
-              className="transition hover:text-white"
-            >
-              Login
-            </NavLink>
-          )}
-        </nav>
+      <div className="mx-auto flex max-w-3xl items-center rounded-full border border-zinc-700 bg-zinc-900 px-4 py-3">
+
+        <FiSearch className="mr-3 text-zinc-400" />
+
+        <input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={handleSearch}
+          placeholder="Search movies..."
+          className="w-full bg-transparent outline-none"
+        />
+
       </div>
-    </header>
+
+      {(loadingSuggestions || suggestions.length > 0) && (
+        <div className="absolute left-0 right-0 z-50 mt-2 mx-auto max-w-3xl rounded-xl border border-zinc-800 bg-zinc-950 shadow-2xl">
+
+          {loadingSuggestions ? (
+            <p className="p-4 text-zinc-400">
+              Searching...
+            </p>
+          ) : (
+            suggestions.map((movie) => (
+              <button
+                key={movie.id}
+                onClick={() => handleSuggestionClick(movie)}
+                className="flex w-full items-center px-4 py-3 hover:bg-zinc-900"
+              >
+                {movie.title}
+              </button>
+            ))
+          )}
+
+        </div>
+      )}
+
+    </div>
+
+  </div>
+</header>
   );
 };
 
