@@ -22,9 +22,10 @@ const app = express();
 
 // Middleware
 const allowedOrigins = [
-  "http://localhost:5173", // Local React
-  "movie-recommendation-system-lu34a8987.vercel.app",  // Production React (Vercel)
-].filter(Boolean);
+  "http://localhost:5173",
+  "https://movie-recommendation-system-lu34a8987.vercel.app",
+  "https://movie-recommendation-system-nine-murex.vercel.app",
+];
 
 app.use(
   cors({
