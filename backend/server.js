@@ -23,7 +23,7 @@ const app = express();
 // Middleware
 const allowedOrigins = [
   "http://localhost:5173", // Local React
-  "https://movie-recommendation-system-lu34a8987.vercel.app",  // Production React (Vercel)
+  "movie-recommendation-system-lu34a8987.vercel.app",  // Production React (Vercel)
 ].filter(Boolean);
 
 app.use(
