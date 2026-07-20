@@ -4,21 +4,18 @@ from fastapi.middleware.cors import CORSMiddleware
 import pickle
 from sklearn.metrics.pairwise import cosine_similarity
 from pydantic import BaseModel
-# ============================================
-# Create FastAPI Application
-# ============================================
 
+# Create FastAPI Application
 app = FastAPI()
 
-# ============================================
+ 
 # Enable CORS
-# ============================================
 
 app.add_middleware(
     CORSMiddleware,
    allow_origins=[
     "http://localhost:5173",  # React
-    "http://localhost:5000",  # Node  
+    "http://localhost:5000",  # Node  # no need for node as cors is only for browser request
 ],
     allow_credentials=True,
     allow_methods=["*"],
