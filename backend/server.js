@@ -21,30 +21,23 @@ connectDB();
 const app = express();
 
 // Middleware
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://movie-recommendation-system-lu34a8987.vercel.app",
-  "https://movie-recommendation-system-nine-murex.vercel.app",
-];
+const allowedOriginRegex =
+  /^https:\/\/movie-recommendation-system-.*\.vercel\.app$/;
 
 app.use(
   cors({
-    origin: (origin, callback) => {
-      console.log("Incoming Origin:", origin);
-      console.log("Allowed Origins:", allowedOrigins);
+    origin(origin, callback) {
+      if (!origin) return callback(null, true);
 
-      if (!origin) {
-        console.log("No Origin header");
+      if (
+        origin === "http://localhost:5173" ||
+        allowedOriginRegex.test(origin)
+      ) {
         return callback(null, true);
       }
 
-      if (allowedOrigins.includes(origin)) {
-        console.log("Origin Allowed");
-        return callback(null, true);
-      }
-
-      console.log("Blocked Origin:", origin);
-      callback(new Error("Not allowed by CORS"));
+      console.log("incoming origin is -> ",origin)
+      return callback(new Error("Not allowed by CORS"));
     },
     credentials: true,
   })
