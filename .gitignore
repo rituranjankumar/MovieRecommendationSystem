@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+ML_NLP/venv/
+ML_NLP/.venv/
+__pycache__/
+*.py[cod]
+
+# Environment files
+.env
+.env.local
+.env.*.local
+backend/.env
+frontend/.env
+ML_NLP/.env
+
+# Build outputs
+frontend/dist/
+frontend/build/
+backend/dist/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+
+# Python artifacts
+*.sqlite3
+*.db
+
+# Coverage / test output
+coverage/
+htmlcov/
+.pytest_cache/
