@@ -3,8 +3,7 @@ import mongoose from "mongoose";
 const connectDB = async () => {
   try {
     const mongoURI =
-      process.env.MONGO_URI ||
-      "mongodb+srv://kunal50639:Sitthu_1979@cluster0.0u5d9yg.mongodb.net/movieRecommender";
+      process.env.MONGO_URI ;
 
     const connection = await mongoose.connect(mongoURI);
 
